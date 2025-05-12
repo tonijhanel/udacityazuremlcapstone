@@ -56,7 +56,7 @@ This project aims to build a predictive model to classify loan applications as e
 | `enable_early_stopping`     | `True`                  | Flag to enable early termination of poorly performing runs.                   |
 | `featurization`               | `'auto'`                | Specifies that featurization should be performed automatically.               |             |
 
-![Auto ML Model](images\automlbestmodel.png) Auto ML Runs
+![Auto ML Model](images/automlbestmodel.png) Auto ML Runs
 
 ### Results
 The Automated ML run's best model was a voting ensemble that included several pipelines. Among them were pipelines featuring a StandardScalerWrapper with an XGBoostClassifier, a MaxAbsScaler with LightGBM, and a StandardScalerWrapper with a RandomForestClassifier. This ensemble approach yielded a strong performance with an AUC score of 0.94612.
@@ -79,12 +79,12 @@ To optimize the XGBoost model, we employed **RandomParameterSampling** to explor
 
 By randomly sampling from these parameter ranges, HyperDrive systematically explored different configurations of the XGBoost model to identify the one that yields the best performance on our loan approval prediction task.
 
-![Hyper Drive Job](images\hyperdrive_job.png) Hyper Drive Job
+![Hyper Drive Job](images/hyperdrive_job.png) Hyper Drive Job
 
 
-![Hyper Drive Run Completed](images\hyperdrive_complete.png) Completed Hyper Drive Run
+![Hyper Drive Run Completed](images/hyperdrive_complete.png) Completed Hyper Drive Run
 
-![Hyper Drive Trial Runs and Metrics](images\hyperdrive_trials.png) Hyper Drive Trial Runs and Metrics
+![Hyper Drive Trial Runs and Metrics](images/hyperdrive_trials.png) Hyper Drive Trial Runs and Metrics
 
 ### Results
 
@@ -96,9 +96,9 @@ The best performing run from the HyperDrive experiment achieved the following me
 * **Random State:** 1
 * **Accuracy:** 0.9317
 
-![Hyper Drive Best Run](images\hyperdrive_bestrun.png) Best Hyper Drive Run
+![Hyper Drive Best Run](images/hyperdrive_bestrun.png) Best Hyper Drive Run
 
-![Hyper Drive RunDetails](images\hyperdrive_rundetails.png) Hyper Drive RunDetails
+![Hyper Drive RunDetails](images/hyperdrive_rundetails.png) Hyper Drive RunDetails
 
 
 
@@ -107,11 +107,11 @@ The best performing run from the HyperDrive experiment achieved the following me
 ## Model Deployment
 The Automated ML experiment yielded a voting ensemble model that demonstrated superior performance. While both the Automated ML and HyperDrive experiments produced strong results, the Automated ML model was selected for deployment due to its higher accuracy score. A higher accuracy score indicates that the Automated ML model is better at correctly classifying loan applications as approved or not approved, which is a critical factor in a production setting. Therefore, prioritizing accuracy, the Automated ML model was chosen for deployment to ensure the most reliable loan approval predictions.
 
-![Registered Model](images\bestautomlmodelregistered.png) Registered Model
+![Registered Model](images/bestautomlmodelregistered.png) Registered Model
 
-![Model Swagger Definition](images\automl_swagger.png) Model Swagger Definition
+![Model Swagger Definition](images/automl_swagger.png) Model Swagger Definition
 
-![Model Web Service Request](images\automl_webservicerequest.png) Model Web Service Request and Response
+![Model Web Service Request](images/automl_webservicerequest.png) Model Web Service Request and Response
 
 
 ## Screen Recording
