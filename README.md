@@ -61,9 +61,9 @@ This project aims to build a predictive model to classify loan applications as e
 ### Results
 The Automated ML run's best model was a voting ensemble that included several pipelines. Among them were pipelines featuring a StandardScalerWrapper with an XGBoostClassifier, a MaxAbsScaler with LightGBM, and a StandardScalerWrapper with a RandomForestClassifier. This ensemble approach yielded a strong performance with an AUC score of 0.94612.
 
-![Best Model](images\bestautomlrunnotebook.png) Best AutoML Run
+![Best Model](images/bestautomlrunnotebook.png) Best AutoML Run
 
-![RunDetails](images\rundetails.png) Run Details
+![RunDetails](images/rundetails.png) Run Details
 
 
 
