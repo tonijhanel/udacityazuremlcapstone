@@ -56,31 +56,68 @@ This project aims to build a predictive model to classify loan applications as e
 | `enable_early_stopping`     | `True`                  | Flag to enable early termination of poorly performing runs.                   |
 | `featurization`               | `'auto'`                | Specifies that featurization should be performed automatically.               |             |
 
+![Auto ML Model](images\automlbestmodel.png) Auto ML Runs
 
 ### Results
 The Automated ML run's best model was a voting ensemble that included several pipelines. Among them were pipelines featuring a StandardScalerWrapper with an XGBoostClassifier, a MaxAbsScaler with LightGBM, and a StandardScalerWrapper with a RandomForestClassifier. This ensemble approach yielded a strong performance with an AUC score of 0.94612.
 
 ![Best Model](images\bestautomlrunnotebook.png) Best AutoML Run
 
-*TODO* Remeber to provide screenshots of the `RunDetails` widget as well as a screenshot of the best model trained with it's parameters.
+![RunDetails](images\rundetails.png) Run Details
+
+
+
 
 ## Hyperparameter Tuning
-*TODO*: What kind of model did you choose for this experiment and why? Give an overview of the types of parameters and their ranges used for the hyperparameter search
+For the HyperDrive experiment, we chose to tune an **XGBoostClassifier**. XGBoost is a gradient boosting algorithm known for its performance and scalability, often achieving state-of-the-art results on structured data classification tasks. We selected it for its ability to handle complex relationships within the loan application features.
 
+To optimize the XGBoost model, we employed **RandomParameterSampling** to explore the hyperparameter space. The key parameters we searched over and their respective ranges were:
+
+* `--learning_rate`: Sampled using a $\text{loguniform}(-3, -1)$ distribution. This explores learning rates on a logarithmic scale between $10^{-3}$ and $10^{-1}$ (0.001 to 0.1), which is often beneficial for finding an appropriate step size during the gradient boosting process.
+* `--n_estimators`: Discrete choices of 50, 100, 150, or 200. This parameter controls the number of boosting rounds or trees in the ensemble.
+* `--max_depth`: Discrete choices of 3, 4, 5, or 6. This parameter limits the maximum depth of each tree, controlling the complexity of the individual learners.
+
+By randomly sampling from these parameter ranges, HyperDrive systematically explored different configurations of the XGBoost model to identify the one that yields the best performance on our loan approval prediction task.
+
+![Hyper Drive Job](images\hyperdrive_job.png) Hyper Drive Job
+
+
+![Hyper Drive Run Completed](images\hyperdrive_complete.png) Completed Hyper Drive Run
+
+![Hyper Drive Trial Runs and Metrics](images\hyperdrive_trials.png) Hyper Drive Trial Runs and Metrics
 
 ### Results
-*TODO*: What are the results you got with your model? What were the parameters of the model? How could you have improved it?
 
-*TODO* Remeber to provide screenshots of the `RunDetails` widget as well as a screenshot of the best model trained with it's parameters.
+The best performing run from the HyperDrive experiment achieved the following metrics with the corresponding hyperparameter values:
+
+* **Learning Rate:** 0.20616888331427718
+* **Max Depth:** 6
+* **Number of Estimators:** 150
+* **Random State:** 1
+* **Accuracy:** 0.9317
+
+![Hyper Drive Best Run](images\hyperdrive_bestrun.png) Best Hyper Drive Run
+
+![Hyper Drive RunDetails](images\hyperdrive_rundetails.png) Hyper Drive RunDetails
+
+
+
+
 
 ## Model Deployment
-*TODO*: Give an overview of the deployed model and instructions on how to query the endpoint with a sample input.
+The Automated ML experiment yielded a voting ensemble model that demonstrated superior performance. While both the Automated ML and HyperDrive experiments produced strong results, the Automated ML model was selected for deployment due to its higher accuracy score. A higher accuracy score indicates that the Automated ML model is better at correctly classifying loan applications as approved or not approved, which is a critical factor in a production setting. Therefore, prioritizing accuracy, the Automated ML model was chosen for deployment to ensure the most reliable loan approval predictions.
+
+![Registered Model](images\bestautomlmodelregistered.png) Registered Model
+
+![Model Swagger Definition](images\automl_swagger.png) Model Swagger Definition
+
+![Model Web Service Request](images\automl_webservicerequest.png) Model Web Service Request and Response
+
 
 ## Screen Recording
-*TODO* Provide a link to a screen recording of the project in action. Remember that the screencast should demonstrate:
-- A working model
-- Demo of the deployed  model
-- Demo of a sample request sent to the endpoint and its response
 
-## Standout Suggestions
-*TODO (Optional):* This is where you can provide information about any standout suggestions that you have attempted.
+[Automated ML Screen Recording](https://drive.google.com/file/d/1B6poXfW_Bozn_4rWqrQcXHFpsD9brWUM/view?usp=sharing)
+
+[Hyper Drive Screen Recording](https://drive.google.com/file/d/1g2MTWZuCv5qHLBxh9RvuKV6B_wvZ30Jn/view?usp=sharing)
+
+
